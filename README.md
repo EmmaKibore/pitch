@@ -24,5 +24,16 @@ In case of any issues or inquiries ,you can reach me through:
 * Telephone: + (254) 702499205
 * email: emmaKibore@gmail.com
 
-## KNown Bugs
-No known Bugs 
+## Known Bugs
+No known Bugs
+
+## Tecnologies Used
+* Python3.6
+* Flask framework
+* Bootstrap
+* PostgresSQL
+
+## License
+* MIT License
+
+Copyright Emma Kibore
