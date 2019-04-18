@@ -6,6 +6,22 @@ By Emma Kibore
 ## Description
 This is a web application that allows various users to submit a short pitch. Users can also be able to view other pitches from different categories (Pick-up Lines, Interview Pitches, Product Pitches, Promotion Pitches), comment and vote. For a user to do any of that, they need to have registered.
 
+## BDD
+| Behaviour             |      Input       |                Output                               |
+| :-------------        | :--------------- | :---------------------------------------------------|
+| Display Various Pitch |      N/A         |Various pitches grouped by categories are displayed  |
+| Categories            |                  |                                                     |
+| :-------------------- | :--------------- | :---------------------------------------------------|
+| Display pitches       | Click on a       | A page with a list of pitches from the selected     |
+|                       | Category         |   category                                          |
+| :-------------------- | :--------------- | :---------------------------------------------------|
+| Add new pitch         | Click new pitch  |  User should sign in to add new pitch               |
+| :-------------------- | :--------------- | :---------------------------------------------------|
+| View Pitches          | Click on a pitch | View a pitch and comment                            |
+| :-------------------- | :--------------- | :-------------------------------------------------- |
+| Comment on a pitch    | Click Comment    | registered User displays a form where a user can    |
+|                       |                  |     comment on a particular pitch                   |
+
 ## Prerequisites
 * Python3.6
 
