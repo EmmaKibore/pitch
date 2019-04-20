@@ -1,4 +1,4 @@
-from .import db
+from . import db
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -9,7 +9,7 @@ class User(db.Model):
         return f'User {self.username}'
 
 class Role(db.model):
-    __tablename__ 'roles'
+    __tablename__ = 'roles'
 
 
     id = db.Column(db.Integer,primary_key = True)
@@ -18,4 +18,4 @@ class Role(db.model):
 
 
     def __repr__(self):
-        return f'User {self.name}'        
+        return f'User {self.name}'
