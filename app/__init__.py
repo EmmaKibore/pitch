@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
+from .auth import auth as auth_blueprint
+app.register_blueprint(auth_blueprint,url_prefix = '/authenticate')
 
 # Initializing flask extensions
 def create_app(config_name):
