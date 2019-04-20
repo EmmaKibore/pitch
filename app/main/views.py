@@ -8,5 +8,5 @@ def index(pitch_id):
     View root page function that returns the index page and its data
     '''
 
-    messsage = 'Pitch panel'
-    return render_template('pitch.html', id = pitch_id)
+    title = 'Pitch panel'
+    return render_template('pitch.html', title = title)
