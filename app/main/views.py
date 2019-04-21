@@ -5,6 +5,7 @@ from flask_login import login_required
 from .. models import User,Reviews
 from . forms import RegistrationForm
 from . forms import ReviewForm,UpadteProfile
+from ..email import mail_message
 
 
 @auth.route('/register',methods = ["GET","POST"])
@@ -27,7 +28,7 @@ def update_pic(uname):
         path = f'photos/{filename}'
         user.profile_pic_path = path
         db.session.commit()
-    return redirect(url_for('main.profile',uname=uname))    
+    return redirect(url_for('main.profile',uname=uname))
 
 @main.route('/user/<uname>')
 def profile(uname):
