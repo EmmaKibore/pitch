@@ -1,8 +1,8 @@
-from flask import render_template,redirect,url_for
+from flask import render_template,redirect,url_for,abort
 from app import app
 from ..import db
 from flask_login import login_required
-from .. models import User
+from .. models import User,Reviews
 from . forms import RegistrationForm
 
 
@@ -16,6 +16,15 @@ def register():
         return redirect(url_for('auth.login'))
         title = "New Account"
     return render_template('auth/register.html',registration_form = form)
+
+@main.route('/user/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username = uname).first()
+
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user)
 
 #views
 @app.route('/'')
