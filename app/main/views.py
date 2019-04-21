@@ -1,5 +1,6 @@
 from flask import render_template
 from app import app
+from ..import db
 
 #views
 @app.route('/pitch/<int:pitch_id>')
