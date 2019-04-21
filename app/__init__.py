@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from .auth import auth as auth_blueprint
 from flask import loginManager
+from flask_uploads import UploadSet,configure_uploads,IMAGES
 app.register_blueprint(auth_blueprint,url_prefix = '/authenticate')
 
 login_manager = LoginManager()
@@ -14,10 +15,16 @@ def create_app(config_name):
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://emmah:kHAOYAISDEAD2008@localhost/test'
     db = SQLAlchemy(app)
 
+    photos = UploadSet('photos',IMAGES)
+def create_app(config_name):
+
     # Initializing flask extensions
     bootstrap.init_app(app)
     db.init_app(app)
     login_manager.init_app(app)
+
+    # configure UploadSet
+    configure_uploads(app,photos)
 
 
 

@@ -14,6 +14,8 @@ class Config:
     '''
     PITCH_API_BASE_URL = 'https://api.thepitchdb.org/3/pitch/{}?api_key={}'
 
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
+
 class ProdConfig(Config):
 
 class DevConfig(Config):
