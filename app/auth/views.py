@@ -1,5 +1,5 @@
 from flask import render_template,redirect,url_for,flash,request
-from flask_login import login_user,logout_user,login_required
+from flask_login import login_user,logout_user,login_required,current_user
 from ..models import User
 from .forms import LoginForm,RegistrationForm
 
@@ -30,7 +30,26 @@ def register():
 
         return redirect(url_for('auth.login'))
         title = "New Account"
-    return render_template('auth/register.html',registration_form = form)    
+    return render_template('auth/register.html',registration_form = form)
+
+@main.route('/movie/review/new/<int:id>', methods = ['GET','POST'])
+@login_required
+def new_review(id):
+    form = ReviewForm()
+    movie = get_movie(id)
+    if form.validate_on_submit():
+        title = form.title.data
+        review = form.review.data
+
+        # Updated review instance
+        new_review = Review(movie_id=movie.id,movie_title=title,image_path=movie.poster,movie_review=review,user=current_user)
+
+        # save review method
+        new_review.save_review()
+        return redirect(url_for('.movie',id = movie.id ))
+
+    title = f'{movie.title} review'
+    return render_template('new_review.html',title = title, review_form=form, movie=movie)        
 
 @auth.route('/logout')
 @login_required
