@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from .auth import auth as auth_blueprint
-from flask import login manager()
+from flask import loginManager
 app.register_blueprint(auth_blueprint,url_prefix = '/authenticate')
 
 login_manager = LoginManager()
