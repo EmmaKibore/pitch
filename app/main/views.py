@@ -6,6 +6,21 @@ from .. models import User,Reviews
 from . forms import RegistrationForm
 from . forms import ReviewForm,UpadteProfile
 from ..email import mail_message
+import markdown2
+
+
+
+#views
+@app.route('/'')
+def index(id):
+    '''
+    View root page function that returns the index page and its data
+    '''
+
+    title = 'Pitch panel'
+
+
+   return render_template('index.html', title= title, pitchs = pitchs)
 
 
 @auth.route('/register',methods = ["GET","POST"])
@@ -47,20 +62,27 @@ def profile(uname):
 
         return redirect(url_for('.profile',uname=user.username))
 
-    return render_template('profile/update.html',form =form)
-
-    return render_template("profile/profile.html", user = user)
-
-#views
-@app.route('/'')
-def index(id):
-    '''
-    View root page function that returns the index page and its data
-    '''
-
-    title = 'Pitch panel'
 
 @main.route('/pitch/review/new/<int:id>', methods = ['GET','POST'])
 @login_required
 def new_review(id)
     return render_template('pitch.html', title = title)
+
+@main.route('/comment/new/<int:id>', methods=['GET','POST'])
+@login_required
+def new_comment(id):
+    form = CommentForm()
+
+    if form.validate_on_submit():
+
+        comment_content = form.comment.data
+
+        comment = Comment(comment_content= comment_content,pitch_id=id)
+
+        # pitch.save_pitch(pitch)
+        db.session.add(comment)
+        db.session.commit()
+
+    comment = Comment.query.filter_by(pitch_id=id).all()
+
+        return render_template('new_comment.html', title='New Post', comment=comment,comment_form=form, post ='New Post')
