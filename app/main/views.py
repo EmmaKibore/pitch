@@ -4,7 +4,7 @@ from app import app
 from ..import db,photos
 from flask_login import login_required
 from .. models import User, Pitch, Comment
-from . forms import RegistrationForm
+# from . forms import RegistrationForm
 from . forms import UpdateProfile, PitchForm, CommentForm
 from ..email import mail_message
 from . import main
@@ -13,7 +13,7 @@ from . import main
 
 
 #views
-@app.route('/'')
+@app.route('/')
 def index(id):
     '''
     View root page function that returns the index page and its data
@@ -23,7 +23,7 @@ def index(id):
     pitches = Pitch.query.all()
 
 
-   return render_template('index.html', title= title, pitches = pitches)
+    return render_template('index.html', title= title, pitches = pitches)
 
 @main.route('/user/<uname>')
 def profile(uname):

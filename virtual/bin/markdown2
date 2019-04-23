@@ -1,4 +1,4 @@
-#!/home/emmah/Desktop/moringa-school-projects/Pitch/virtual/bin/python
+#!/home/emmah/Desktop/moringa-school-projects/Pitch/virtual/bin/python3
 
 import sys
 from os.path import join, dirname, exists
