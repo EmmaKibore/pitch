@@ -19,6 +19,10 @@ class User(UserMixin,db.Model):
     profile_pic_path = db.Column(db.string())
     password_hash = db.Column(db.String(225))
 
+    pitchs = db.relationship('Pitch',backref='user',lazy='dynamic')
+    comments = db.relationship('Comment', backref = 'comment', lazy= "dynamic")
+
+
     @property
     def password(self):
             raise AttributeError('You cannot read the password attribute')
@@ -34,35 +38,35 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return f'User {self.username}'
 
-class Role(db.model):
-    __tablename__ = 'roles'
+class Pitch(db.model):
+    __tablename__ = 'pitch'
 
 
     id = db.Column(db.Integer,primary_key = True)
-    name = db.Column(db.String(255))
-    users = db.relationship('Review',backref = 'user',lazy = "dynamic")
+    title = db.Column(db.String(255))
+    content = db.Column(db.String())
+    category = db.Column(db.String(255))
+
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    pitch_id = db.relationship('Comment', backref = 'comments', lazy= "dynamic")
 
 
     def __repr__(self):
         return f'User {self.name}'
 
-class Review(db.Model):
+class Comment(db.Model):
 
-    __tablename__ = 'pitch'
+    __tablename__ = 'Comments'
 
     id = db.Column(db.Integer,primary_key = True)
-    movie_id = db.Column(db.Integer)
-    movie_title = db.Column(db.String)
-    image_path = db.Column(db.String)
-    pitch = db.Column(db.String)
-    posted = db.Column(db.DateTime,default=datetime.utcnow)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+    comment_content = db.Column(db.String())
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitch.id'))
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
-    def save_review(self):
+
+    def save_comment(self):
         db.session.add(self)
         db.session.commit()
 
-    @classmethod
-    def get_reviews(cls,id):
-        reviews = Review.query.filter_by(movie_id=id).all()
-        return reviews
+     def __repr__(self):
+        return f'{self.comment}'  
