@@ -35,14 +35,10 @@ def register():
     title = "New Account"
     return render_template('auth/register.html',registration_form = form)
 
-        # # save review method
-        # new_review.save_review()
-        # return redirect(url_for('.movie',id = movie.id ))
-
 
 @auth.route('/auth/logout')
 @login_required
 def logout():
     logout_user()
 
-    return redirect(url_for("main.index"))
+    return redirect(url_for("auth.login"))

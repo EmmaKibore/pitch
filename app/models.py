@@ -29,11 +29,11 @@ class User(UserMixin,db.Model):
 
     @password.setter
     def password(self, password):
-        self.pass_secure = generate_password_hash(password)
+        self.password_hash = generate_password_hash(password)
 
 
     def verify_password(self,password):
-        return check_password_hash(self.pass_secure,password)
+        return check_password_hash(self.password_hash,password)
 
     def __repr__(self):
         return f'User {self.username}'
@@ -62,6 +62,7 @@ class Comment(db.Model):
     comment_content = db.Column(db.String())
     pitch_id = db.Column(db.Integer,db.ForeignKey('pitch.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+
 
 
     def save_comment(self):
